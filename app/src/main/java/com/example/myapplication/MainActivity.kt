@@ -14,7 +14,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+            CalculadoraPropinasApp()
         }
     }
 }
+
+@Composable
+fun CalculadoraPropinasApp() {
+    var monto by remember { mutableStateOf("") }
+    var porcentaje by remember { mutableStateOf("") }
+    var resultado by remember { mutableStateOf("Resultado: $0.00") }
