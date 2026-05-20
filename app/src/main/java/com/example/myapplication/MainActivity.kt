@@ -24,3 +24,50 @@ fun CalculadoraPropinasApp() {
     var monto by remember { mutableStateOf("") }
     var porcentaje by remember { mutableStateOf("") }
     var resultado by remember { mutableStateOf("Resultado: $0.00") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+
+        Text(text = "Calculadora de Propinas")
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        TextField(
+            value = monto,
+            onValueChange = { monto = it },
+            label = { Text("Monto de la cuenta") }
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        TextField(
+            value = porcentaje,
+            onValueChange = { porcentaje = it },
+            label = { Text("Porcentaje de propina") }
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Button(
+            onClick = {
+                val cuenta = monto.toDoubleOrNull() ?: 0.0
+                val propinaPorcentaje = porcentaje.toDoubleOrNull() ?: 0.0
+                val propina = cuenta * propinaPorcentaje / 100
+                val total = cuenta + propina
+
+                resultado = "Propina: $${"%.2f".format(propina)}\nTotal: $${"%.2f".format(total)}"
+            }
+        ) {
+            Text("Calcular propina")
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(text = resultado)
+    }
+}
